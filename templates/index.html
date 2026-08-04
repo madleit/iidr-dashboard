@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+
+    <title>IIDR Dashboard</title>
+
+    <link
+    	rel="stylesheet"
+	href="/static/css/dashboard.css">
+
+</head>
+
+<body>
+
+<h1>IIDR Dashboard</h1>
+
+<button
+    class="refresh-button"
+    onclick="loadData()">
+    Atualizar
+</button>
+
+<div class="card">
+
+    <h2>Health</h2>
+
+    <div id="health">
+        Carregando...
+    </div>
+
+</div>
+
+<div class="card">
+
+    <h2>Replication Overview</h2>
+
+    <div id="overview">
+        Carregando...
+    </div>
+
+</div>
+
+<div class="card">
+
+    <h2>Datastores</h2>
+
+    <div id="datastores">
+        Carregando...
+    </div>
+
+</div>
+
+<div class="card">
+
+    <h2>Subscriptions</h2>
+
+    <div id="subscriptions">
+        Carregando...
+    </div>
+
+</div>
+
+<div class="card">
+
+    <h2>Monitor Replication</h2>
+
+    <div id="monitor">
+        Carregando...
+    </div>
+
+</div>
+
+<div class="card">
+
+    <h2>Latency</h2>
+
+    <div id="latency">
+        Carregando...
+    </div>
+
+</div>
+
+<div class="card">
+
+    <h2>Events</h2>
+
+    <button
+        class="tab-button"
+        onclick="showSourceEvents()">
+        Source
+    </button>
+
+    <button
+        class="tab-button"
+        onclick="showTargetEvents()">
+        Target
+    </button>
+
+    <div
+        id="events"
+        class="events-container">
+        Carregando...
+    </div>
+
+</div>
+
+<script src="/static/js/tables.js"></script>		
+<script src="/static/js/health.js"></script>
+<script src="/static/js/overview.js"></script>
+<script src="/static/js/events.js"></script>
+<script src="/static/js/dashboard.js"></script>
+
+</body>
+
+</html>
