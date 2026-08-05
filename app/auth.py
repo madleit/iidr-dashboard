@@ -1,5 +1,6 @@
 import grp
 import pwd
+import PAM
 
 
 def authenticate_user(
@@ -7,34 +8,68 @@ def authenticate_user(
     password
 ):
 
+    def pam_conv(
+        auth,
+        query_list,
+        userData
+    ):
+
+        responses = []
+
+        for query, query_type in query_list:
+
+            if (
+                query_type ==
+                PAM.PAM_PROMPT_ECHO_OFF
+            ):
+
+                responses.append(
+                    (
+                        password,
+                        0
+                    )
+                )
+
+            else:
+
+                responses.append(
+                    (
+                        "",
+                        0
+                    )
+                )
+
+        return responses
+
     try:
 
-        pwd.getpwnam(
+        auth = PAM.pam()
+
+        auth.start(
+            "login"
+        )
+
+        auth.set_item(
+            PAM.PAM_USER,
             username
         )
 
+        auth.set_item(
+            PAM.PAM_CONV,
+            pam_conv
+        )
+
+        auth.authenticate()
+
+        auth.acct_mgmt()
+
         return True
 
-    except KeyError:
+    except PAM.error:
 
         return False
 
-
-def user_in_group(
-    username,
-    group_name="cdc"
-):
-
-    try:
-
-        group = grp.getgrnam(
-            group_name
-        )
-
-        return (
-            username in group.gr_mem
-        )
-
-    except KeyError:
+    except Exception:
 
         return False
+``
