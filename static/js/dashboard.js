@@ -59,6 +59,10 @@ async function loadData() {
             dashboardData
     );
 
+    renderColumnMappings(
+            dashboardData
+    );
+
     renderSubscriptions(
         dashboardData.subscriptions || []
     );

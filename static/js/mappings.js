@@ -187,3 +187,85 @@ function renderTableMappingDetails(data) {
 
 `;
 }
+
+function toggleColumnMappings() {
+
+    const mappings =
+        document.getElementById(
+            "column-mappings"
+        );
+
+    if (
+        mappings.style.display ===
+        "none"
+    ) {
+
+        mappings.style.display =
+            "block";
+
+    } else {
+
+        mappings.style.display =
+            "none";
+    }
+}
+
+function renderColumnMappings(data) {
+
+    const mappings =
+        data.column_mappings || [];
+
+    if (
+        mappings.length === 0
+    ) {
+
+        document
+            .getElementById(
+                "column-mappings"
+            )
+            .innerHTML =
+                "No column mappings";
+
+        return;
+    }
+
+    let html = `
+
+<table class="data-table">
+
+<thead>
+
+<tr>
+    <th>Source Column</th>
+    <th>Target Column</th>
+</tr>
+
+</thead>
+
+<tbody>
+`;
+
+    mappings.forEach(
+        mapping => {
+
+            html += `
+
+<tr>
+    <td>${mapping.source_column}</td>
+    <td>${mapping.target_column}</td>
+</tr>
+`;
+        }
+    );
+
+    html += `
+</tbody>
+</table>
+`;
+
+    document
+        .getElementById(
+            "column-mappings"
+        )
+        .innerHTML = html;
+}
