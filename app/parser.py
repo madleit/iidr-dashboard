@@ -426,3 +426,49 @@ def parse_table_mapping_details(raw):
             ] = value
 
     return details
+
+def parse_column_mappings(raw):
+
+    mappings = []
+
+    capture = False
+
+    for line in raw.splitlines():
+
+        line = line.rstrip()
+
+        if (
+            "Column mappings for table mapping"
+            in line
+        ):
+            capture = True
+            continue
+
+        if not capture:
+            continue
+
+        if line.strip().startswith("SOURCE"):
+            continue
+
+        if line.strip().startswith("---"):
+            continue
+
+        if not line.strip():
+            continue
+
+        if line.startswith("Repl >"):
+            break
+
+        parts = line.split()
+
+        if len(parts) < 2:
+            continue
+
+        mappings.append(
+            {
+                "source_column": parts[0],
+                "target_column": parts[1]
+            }
+        )
+
+    return mappings

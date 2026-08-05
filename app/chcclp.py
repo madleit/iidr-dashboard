@@ -199,6 +199,8 @@ sourceTable customers;
 
 show table mapping;
 
+list column mappings;
+
 exit;
 '''
 
@@ -386,6 +388,37 @@ select table mapping
 sourceTable customers;
 
 show table mapping;
+
+exit;
+'''
+
+    return execute(script)
+
+def column_mappings_raw():
+
+    script = '''
+chcclp session set to cdc;
+
+connect server hostname "192.168.56.104"
+port 10101
+username "admin"
+password "2wh8wk2&";
+
+connect datastore
+name CDC_SRC
+context source;
+
+connect datastore
+name CDC_TGT
+context target;
+
+select subscription
+name SYSLAB;
+
+select table mapping
+sourceTable customers;
+
+list column mappings;
 
 exit;
 '''
