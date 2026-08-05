@@ -308,3 +308,110 @@ def parse_table_mappings(raw):
         )
 
     return mappings
+
+def parse_table_mapping_details(raw):
+
+    details = {}
+
+    current_section = "general"
+
+    for line in raw.splitlines():
+
+        line = line.rstrip()
+
+        if not line:
+            continue
+
+        # Ignora cabeçalhos
+        if line.startswith("PROPERTY"):
+            continue
+
+        if line.startswith("----------------"):
+            continue
+
+        if line.startswith("TARGET KEY"):
+            current_section = "target_key"
+            continue
+
+        if line.startswith("REFRESH"):
+            current_section = "refresh"
+            continue
+
+        if line.startswith("ROW-FILTERING"):
+            current_section = "row_filtering"
+            continue
+
+        if line.startswith("CONFLICTS"):
+            current_section = "conflicts"
+            continue
+
+        if ":" not in line:
+            continue
+
+        key, value = line.split(
+            ":",
+            1
+        )
+
+        key = key.strip()
+        value = value.strip()
+
+        if current_section == "general":
+
+            mapping = {
+                "Source Table": "source_table",
+                "Target Table": "target_table",
+                "Mapping Type": "mapping_type",
+                "Method": "method",
+                "Prevent Recursion": "prevent_recursion",
+                "Status": "status"
+            }
+
+        elif current_section == "target_key":
+
+            mapping = {
+                "Index Mode": "index_mode"
+            }
+
+        elif current_section == "refresh":
+
+            mapping = {
+                "Row Subset Refresh": "row_subset_refresh",
+                "Source WHERE clause": "source_where_clause",
+                "Target WHERE clause": "target_where_clause"
+            }
+
+        elif current_section == "row_filtering":
+
+            mapping = {
+                "Row-filtering Expression": "row_filtering_expression",
+                "Select/Omit Rows": "select_omit_rows"
+            }
+
+        elif current_section == "conflicts":
+
+            mapping = {
+                "Conflict Detection Columns":
+                    "conflict_detection_columns",
+
+                "Conflict Resolution Method":
+                    "conflict_resolution_method",
+
+                "Value Comparison Column":
+                    "value_comparison_column",
+
+                "User Exit (with Path)":
+                    "user_exit"
+            }
+
+        else:
+
+            mapping = {}
+
+        if key in mapping:
+
+            details[
+                mapping[key]
+            ] = value
+
+    return details

@@ -355,3 +355,32 @@ exit;
 '''
 
     return execute(script)
+
+def table_mapping_details_raw():
+
+    script = '''
+chcclp session set to cdc;
+
+connect server hostname "...";
+...
+
+connect datastore
+name CDC_SRC
+context source;
+
+connect datastore
+name CDC_TGT
+context target;
+
+select subscription
+name SYSLAB;
+
+select table mapping
+sourceTable customers;
+
+show table mapping;
+
+exit;
+'''
+
+    return execute(script)
