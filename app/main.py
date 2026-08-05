@@ -7,6 +7,9 @@ from fastapi.responses import RedirectResponse
 from fastapi import Form
 from fastapi.templating import Jinja2Templates
 
+from app.config import (
+    load_config
+)
 
 from app.auth import (
     authenticate_user,
@@ -121,21 +124,60 @@ def dashboard(
     if not request.session.get(
         "authenticated"
     ):
+
         return RedirectResponse(
             "/login",
             status_code=302
         )
 
+    config = load_config()
+
     return templates.TemplateResponse(
         "index.html",
         {
             "request": request,
+
             "username":
                 request.session.get(
                     "username"
-                )
+                ),
+
+            "app_name":
+                config[
+                    "application_name"
+                ],
+
+            "version":
+                config[
+                    "version"
+                ],
+
+            "customer_name":
+                config[
+                    "customer_name"
+                ],
+
+            "environment_name":
+                config[
+                    "environment_name"
+                ],
+
+            "kyndryl_logo":
+                config[
+                    "branding"
+                ][
+                    "kyndryl_logo"
+                ],
+
+            "client_logo":
+                config[
+                    "branding"
+                ][
+                    "client_logo"
+                ]
         }
     )
+  
 
 @app.get("/latency")
 def latency():

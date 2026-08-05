@@ -13,21 +13,44 @@
 
 <body>
 
-<h1>IIDR Dashboard</h1>
-<div class="user-bar">
+<header class="app-header">
 
-    Logged in as:
-    <strong>
-        {{ username }}
-    </strong>
+    <div class="brand-area">
 
-    |
-    <a
-    href="/logout">
-        Logout
-    </a>
+        <img
+            src="{{ kyndryl_logo }}"  alt="Kyndryl">
+            
+        <div class="brand-divider"></div>
 
-</div>
+        <img
+            src="{{ client_logo }}" class="client-content" alt="FedEX">
+
+        <div class="app-title">
+            {{ app_name }}
+        </div>
+
+        <div class="app-environment">s
+            {{ customer_name }}
+            {{ environment_name }}
+            Environment
+        </div>
+
+        <div class="header-meta">
+            <span>
+                Version {{ version }}
+            </span>
+            <span class="meta-divider">|</span>
+            <span>
+                Logged in as: <strong>{{ username }}</strong>
+            </span>
+            <span class="meta-divider">|</span>
+
+            <a href="/logout" class="logout-link">Logout</a>
+        </div>
+
+    </div>
+
+</header>
 
 <button
     class="refresh-button"

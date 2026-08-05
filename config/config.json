@@ -1,0 +1,12 @@
+{
+    "application_name": "IIDR Operations Console",
+    "version": "1.0",
+
+    "customer_name": "FedEx",
+    "environment_name": "LAB",
+
+    "branding": {
+        "kyndryl_logo": "/static/branding/kyndryl.svg",
+        "client_logo": "/static/branding/client.svg"
+    }
+}
