@@ -236,7 +236,7 @@ async def login(
         password
     ):
         return RedirectResponse(
-            "/login",
+            "/login?error=invalid_credentials",
             status_code=302
         )
 
@@ -245,7 +245,7 @@ async def login(
         "cdc"
     ):
         return RedirectResponse(
-            "/login",
+            "/login?error=access_denied",
             status_code=302
         )
 
