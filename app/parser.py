@@ -345,6 +345,10 @@ def parse_table_mapping_details(raw):
             current_section = "conflicts"
             continue
 
+        print(
+            f"[{current_section}] {line}"
+        )
+
         if ":" not in line:
             continue
 
