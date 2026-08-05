@@ -150,6 +150,12 @@ def parse_dashboard(raw):
         "exit;"
     )
 
+    table_mappings_raw = extract_section(
+        raw,
+        "list table mappings;",
+        "show datastore name CDC_SRC;"
+    )
+
     return {
         "datastores": parse_datastores(datastores_raw),
         "subscriptions": parse_subscriptions(subscriptions_raw),
@@ -159,7 +165,8 @@ def parse_dashboard(raw):
             "source": parse_events(source_events_raw),
             "target": parse_events(target_events_raw)
             },
-        "datastore_health": parse_datastore_health(datastore_health_raw)
+        "datastore_health": parse_datastore_health(datastore_health_raw),
+        "table_mappings": parse_table_mappings(table_mappings_raw)
     }
 
 def get_subscription_state(
@@ -247,3 +254,57 @@ def parse_datastore_health(raw):
         "source": source,
         "target": target
     }
+
+def parse_table_mappings(raw):
+
+    mappings = []
+
+    capture = False
+
+    for line in raw.splitlines():
+
+        if "Table mappings for subscription" in line:
+
+            capture = True
+            continue
+
+        if capture and line.startswith("SOURCE TABLE"):
+
+            continue
+
+        if capture and line.startswith("---"):
+
+            continue
+
+        if not capture:
+
+            continue
+
+        line = line.strip()
+
+        if not line:
+
+            continue
+
+        if line.startswith("Repl >"):
+
+            break
+
+        parts = line.split()
+
+        if len(parts) < 6:
+
+            continue
+
+        mappings.append(
+            {
+                "source_table": parts[0],
+                "target_table": parts[1],
+                "mapping_type": parts[2],
+                "method": parts[3],
+                "status": parts[4],
+                "prevent_recursion": parts[5]
+            }
+        )
+
+    return mappings

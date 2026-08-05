@@ -188,6 +188,8 @@ list subscription events type source count 10;
 
 list subscription events type target count 10;
 
+list table mappings;
+
 show datastore name CDC_SRC;
 
 show datastore name CDC_TGT;
@@ -320,6 +322,34 @@ name CDC_TGT
 context target;
 
 show datastore name CDC_TGT;
+
+exit;
+'''
+
+    return execute(script)
+
+def table_mappings_raw():
+
+    script = '''
+chcclp session set to cdc;
+
+connect server hostname "192.168.56.104"
+port 10101
+username "admin"
+password "2wh8wk2&";
+
+connect datastore
+name CDC_SRC
+context source;
+
+connect datastore
+name CDC_TGT
+context target;
+
+select subscription
+name SYSLAB;
+
+list table mappings;
 
 exit;
 '''
