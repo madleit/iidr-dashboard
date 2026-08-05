@@ -163,7 +163,7 @@ def parse_dashboard(raw):
         "list column mappings;"
     )
 
-    collum_mapping_details_raw = extract_section(
+    column_mappings_raw = extract_section(
         raw,
         "list column mappings;",
         "exit;"
