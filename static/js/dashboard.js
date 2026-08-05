@@ -47,22 +47,25 @@ async function loadData() {
     	    dashboardData
 	);
 
-        renderSubscriptions(
-            dashboardData.subscriptions || []
-        );
+    renderDatastoreDetails(
+            dashboardData
+    );
+    
+    renderSubscriptions(
+        dashboardData.subscriptions || []
+    );
 
-        renderMonitor(
-            dashboardData.monitor || []
-        );
+    renderMonitor(
+        dashboardData.monitor || []
+    );
 
-        renderLatency(
-            dashboardData.latency || []
-        );
+    renderLatency(
+        dashboardData.latency || []
+    );
 
-        renderEvents(
-            dashboardData.events?.[currentEventTab] || []
-        );
-
+    renderEvents(
+        dashboardData.events?.[currentEventTab] || []
+    );
     } catch (error) {
 
         console.error(
