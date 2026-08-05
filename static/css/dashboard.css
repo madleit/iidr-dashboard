@@ -377,7 +377,7 @@ tr:nth-child(even) {
 
     align-items: center;
 
-    gap: 18px;
+    gap: 25px;
 }
 
 .brand-logo {
@@ -409,7 +409,7 @@ tr:nth-child(even) {
 
     width: 1px;
 
-    height: 42px;
+    height: 50px;
 
     background: #d0d0d0;
 }
@@ -421,7 +421,7 @@ tr:nth-child(even) {
 
 .app-title {
 
-    font-size: 28px;
+    font-size: 34px;
 
     font-weight: 700;
 
@@ -430,13 +430,23 @@ tr:nth-child(even) {
 
 .app-environment {
 
-    margin-top: 4px;
+    display: inline-block;
 
-    font-size: 14px;
+    padding: 4px 10px;
+
+    border-radius: 15px;
+
+    background: #e8f0ff;
 
     color: #0f62fe;
 
-    font-weight: 600;
+    font-size: 12px;
+
+    font-weight: 700;
+
+    text-transform: uppercase;
+
+    margin-top: 6px;
 }
 
 .header-meta {
@@ -465,4 +475,13 @@ tr:nth-child(even) {
 .logout-link:hover {
 
     text-decoration: underline;
+}
+
+.app-subtitle {
+
+    color: #6f6f6f;
+
+    font-size: 13px;
+
+    margin-top: 3px;
 }
