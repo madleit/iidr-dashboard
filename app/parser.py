@@ -141,13 +141,14 @@ def parse_dashboard(raw):
     target_events_raw = extract_section(
         raw,
         "list subscription events count 10 type target;",
-        "exit;"
+        "list table mappings;"
     )
 
     datastore_health_raw = extract_section(
         raw,
         "show datastore name CDC_SRC;",
-        "exit;"
+#        "exit;"
+        "select table mapping sourceTable customers;"
     )
 
     table_mappings_raw = extract_section(
@@ -159,6 +160,12 @@ def parse_dashboard(raw):
     table_mapping_details_raw = extract_section(
         raw,
         "show table mapping;",
+        "list column mappings;"
+    )
+
+    collum_mapping_details_raw = extract_section(
+        raw,
+        "list column mappings;",
         "exit;"
     )
 
@@ -173,7 +180,8 @@ def parse_dashboard(raw):
             },
         "datastore_health": parse_datastore_health(datastore_health_raw),
         "table_mappings": parse_table_mappings(table_mappings_raw),
-        "table_mapping_details": parse_table_mapping_details(table_mapping_details_raw)
+        "table_mapping_details": parse_table_mapping_details(table_mapping_details_raw),
+        "column_mappings": parse_column_mappings(column_mappings_raw)
     }
 
 def get_subscription_state(

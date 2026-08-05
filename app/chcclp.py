@@ -184,9 +184,9 @@ select subscription name SYSLAB;
 
 monitor subscription latency;
 
-list subscription events type source count 10;
+list subscription events count 10 type source;
 
-list subscription events type target count 10;
+list subscription events count 10 type target;
 
 list table mappings;
 
