@@ -156,6 +156,12 @@ def parse_dashboard(raw):
         "show datastore name CDC_SRC;"
     )
 
+    table_mapping_details_raw = extract_section(
+        raw,
+        "show table mapping;",
+        "exit;"
+    )
+
     return {
         "datastores": parse_datastores(datastores_raw),
         "subscriptions": parse_subscriptions(subscriptions_raw),
@@ -166,7 +172,8 @@ def parse_dashboard(raw):
             "target": parse_events(target_events_raw)
             },
         "datastore_health": parse_datastore_health(datastore_health_raw),
-        "table_mappings": parse_table_mappings(table_mappings_raw)
+        "table_mappings": parse_table_mappings(table_mappings_raw),
+        "table_mapping_details": parse_table_mapping_details(table_mapping_details_raw)
     }
 
 def get_subscription_state(

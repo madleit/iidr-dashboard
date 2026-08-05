@@ -194,6 +194,11 @@ show datastore name CDC_SRC;
 
 show datastore name CDC_TGT;
 
+select table mapping
+sourceTable customers;
+
+show table mapping;
+
 exit;
 '''
 
