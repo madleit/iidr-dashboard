@@ -361,8 +361,10 @@ def table_mapping_details_raw():
     script = '''
 chcclp session set to cdc;
 
-connect server hostname "...";
-...
+connect server hostname "192.168.56.104"
+port 10101
+username "admin"
+password "2wh8wk2&";
 
 connect datastore
 name CDC_SRC
