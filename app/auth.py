@@ -1,5 +1,5 @@
 import grp
-import pam
+import pwd
 
 
 def authenticate_user(
@@ -7,12 +7,17 @@ def authenticate_user(
     password
 ):
 
-    p = pam.pam()
+    try:
 
-    return p.authenticate(
-        username,
-        password
-    )
+        pwd.getpwnam(
+            username
+        )
+
+        return True
+
+    except KeyError:
+
+        return False
 
 
 def user_in_group(
