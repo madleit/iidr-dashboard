@@ -14,7 +14,20 @@
 <body>
 
 <h1>IIDR Dashboard</h1>
+<div class="user-bar">
 
+    Logged in as:
+    <strong>
+        {{ username }}
+    </strong>
+
+    |
+
+    /logout
+        Logout
+    </a>
+
+</div>
 <button
     class="refresh-button"
     onclick="loadData()">
