@@ -378,6 +378,8 @@ tr:nth-child(even) {
     align-items: center;
 
     gap: 25px;
+
+    width: 320px;
 }
 
 .brand-logo {
@@ -432,9 +434,9 @@ tr:nth-child(even) {
 
     display: inline-block;
 
-    padding: 4px 10px;
+    padding: 4px 12px;
 
-    border-radius: 15px;
+    border-radius: 20px;
 
     background: #e8f0ff;
 
@@ -484,4 +486,18 @@ tr:nth-child(even) {
     font-size: 13px;
 
     margin-top: 3px;
+}
+
+.header-center {
+
+    flex: 1;
+
+    text-align: center;
+}
+
+.header-user {
+
+    width: 220px;
+
+    text-align: right;
 }
