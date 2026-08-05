@@ -1,9 +1,5 @@
 function renderDatastoreHealth(data) {
 
-    console.log(
-	"DATASTORE HEALTH EXECUTOU"
-    );	
-
     const source =
         data.datastore_health?.source;
 
