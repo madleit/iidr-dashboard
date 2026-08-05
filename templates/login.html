@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+
+    <title>
+        IIDR Dashboard Login
+    </title>
+
+    <link rel="stylesheet" href="/static/css/dashboard.css">
+
+</head>
+
+<body>
+
+<div class="login-card">
+
+    <h1>
+        IIDR Dashboard
+    </h1>
+
+    <form
+        action="/login"
+        method="post">
+
+        <input
+            type="text"
+            name="username"
+            placeholder="Linux Username"
+            required>
+
+        <input
+            type="password"
+            name="password"
+            placeholder="Linux Password"
+            required>
+
+        <button
+            type="submit">
+
+            Login
+
+        </button>
+
+    </form>
+
+</div>
+
+</body>
+
+</html>
