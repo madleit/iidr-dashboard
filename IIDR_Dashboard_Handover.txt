@@ -1,0 +1,129 @@
+IIDR Dashboard V1 - Project Handover (OneNote Friendly)
+
+## Objective
+Build a lightweight web dashboard for IBM IIDR / CDC using:
+
+Browser
+    ↓
+FastAPI
+    ↓
+Python
+    ↓
+Classic CHCCLP
+    ↓
+Access Server
+    ↓
+IIDR Engines
+
+No IIDR GUI required.
+
+# Environment
+VM4
+192.168.56.105
+Ubuntu 26.04
+Python 3.14
+Java 17
+
+Access Server
+192.168.56.104
+Port 10101
+User: admin
+
+Datastores
+CDC_SRC
+CDC_TGT
+
+Subscription
+SYSLAB
+
+# Current Project Structure
+
+iidr-dashboard-v1/
+app/
+├── chcclp.py
+├── parser.py
+├── main.py
+
+templates/
+├── index.html
+
+# Current Status
+Working endpoints:
+- /datastores
+- /subscriptions
+- /monitor
+- /latency
+- /events/source
+- /events/target
+- /dashboard
+- /dashboard-data
+
+# Performance Issue
+Current dashboard is slow because each endpoint launches:
+java -jar chcclp.jar
+
+Optimization strategy:
+Create consolidated endpoint:
+/dashboard-data
+
+Single CHCCLP execution.
+Single Access Server login.
+
+# dashboard_data_raw()
+Executes:
+- list datastores
+- list subscriptions
+- monitor replication
+- monitor subscription latency
+- list subscription events count 10 type source
+- list subscription events count 10 type target
+
+# Current Blocking Issue
+/dashboard-data returns:
+- datastores OK
+- subscriptions OK
+- monitor OK
+- latency OK
+- events source EMPTY
+- events target EMPTY
+
+# Root Cause Identified
+parse_dashboard() was searching for:
+list subscription events type source
+list subscription events type target
+
+Actual CHCCLP output:
+list subscription events count 10 type source;
+list subscription events count 10 type target;
+
+Recommended fix inside parse_dashboard():
+
+source_events_raw = extract_section(
+    raw,
+    "type source;",
+    "type target;"
+)
+
+target_events_raw = extract_section(
+    raw,
+    "type target;",
+    "exit;"
+)
+
+# Next Steps
+1. Fix parse_dashboard() delimiters.
+2. Validate /dashboard-data.
+3. Fix index.html to consume only /dashboard-data.
+4. Measure performance.
+5. Create Health Card.
+6. Add Start Mirroring.
+7. Add End Replication.
+
+# Long-Term
+Evaluate persistent CHCCLP daemon using subprocess.Popen() only after MVP is complete.
+
+# Last Known Good State
+Uvicorn starts successfully:
+python3 -m uvicorn app.main:app --host 0.0.0.0 --port 8080
+
+/dashboard-data returns valid JSON except for events arrays.

@@ -1,0 +1,14 @@
+[Unit]
+Description=IIDR CDC Dashboard
+After=network.target
+
+[Service]
+User=iidr-dashboard
+Group=iidr-dashboard
+WorkingDirectory=/opt/iidr-dashboard
+Environment=PATH=/opt/iidr-dashboard/.venv/bin:/usr/bin:/bin
+ExecStart=/opt/iidr-dashboard/.venv/bin/uvicorn app.main:app --host 0.0.0.0 --port 8080
+Restart=on-failure
+
+[Install]
+WantedBy=multi-user.target

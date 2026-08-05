@@ -35,9 +35,17 @@ async function loadData() {
     	    dashboardData
 	);
 
+	renderControlCard(
+            dashboardData
+	);
+
         renderDatastores(
             dashboardData.datastores || []
         );
+	
+	renderDatastoreHealth(
+    	    dashboardData
+	);
 
         renderSubscriptions(
             dashboardData.subscriptions || []

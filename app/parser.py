@@ -144,6 +144,12 @@ def parse_dashboard(raw):
         "exit;"
     )
 
+    datastore_health_raw = extract_section(
+        raw,
+        "show datastore name CDC_SRC;",
+        "exit;"
+    )
+
     return {
         "datastores": parse_datastores(datastores_raw),
         "subscriptions": parse_subscriptions(subscriptions_raw),
@@ -152,5 +158,92 @@ def parse_dashboard(raw):
         "events": {
             "source": parse_events(source_events_raw),
             "target": parse_events(target_events_raw)
-        }
+            },
+        "datastore_health": parse_datastore_health(datastore_health_raw)
+    }
+
+def get_subscription_state(
+    monitor_data,
+    subscription="SYSLAB"
+):
+
+    for item in monitor_data:
+
+        if (
+            item.get(
+                "subscription"
+            ) == subscription
+        ):
+            return item.get(
+                "state",
+                "Unknown"
+            )
+
+    return "Unknown"
+
+def parse_datastore_details(raw):
+
+    datastore = {}
+
+    for line in raw.splitlines():
+
+        line = line.strip()
+
+        if not line:
+            continue
+
+        if line.startswith("PROPERTY"):
+            continue
+
+        if line.startswith("---"):
+            continue
+
+        if ":" not in line:
+            continue
+
+        key, value = line.split(
+            ":",
+            1
+        )
+
+        datastore[
+            key.strip()
+        ] = value.strip()
+
+    return datastore
+
+def parse_datastore_health(raw):
+
+    source_lines = []
+    target_lines = []
+
+    current = None
+
+    for line in raw.splitlines():
+
+        if "show datastore name CDC_SRC" in line:
+            current = "source"
+            continue
+
+        if "show datastore name CDC_TGT" in line:
+            current = "target"
+            continue
+
+        if current == "source":
+            source_lines.append(line)
+
+        elif current == "target":
+            target_lines.append(line)
+
+    source = parse_datastore_details(
+        "\n".join(source_lines)
+    )
+
+    target = parse_datastore_details(
+        "\n".join(target_lines)
+    )
+
+    return {
+        "source": source,
+        "target": target
     }

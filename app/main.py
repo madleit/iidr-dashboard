@@ -9,7 +9,9 @@ from app.chcclp import (
         monitor_latency,
         source_events,
         target_events,
-        dashboard_data_raw
+        dashboard_data_raw,
+        start_mirroring,
+        end_replication
         )
 from app.parser import (
         parse_monitor,
@@ -112,3 +114,13 @@ def dashboard_raw():
     return {
         "output": dashboard_data_raw()
     }
+
+@app.post("/start-mirroring")
+def api_start_mirroring():
+
+    return start_mirroring()
+
+@app.post("/end-replication")
+def api_end_replication():
+
+    return end_replication()

@@ -207,3 +207,122 @@ tr:nth-child(even) {
 .score-red {
     color: #dc2626;
 }
+
+.control-button {
+
+    padding: 12px 20px;
+
+    border: none;
+
+    border-radius: 6px;
+
+    font-size: 14px;
+
+    font-weight: bold;
+
+    cursor: pointer;
+
+    margin-right: 10px;
+}
+
+.start-button {
+
+    background: #16a34a;
+
+    color: white;
+}
+
+.stop-button {
+
+    background: #dc2626;
+
+    color: white;
+}
+
+.control-button:disabled {
+
+    opacity: 0.5;
+
+    cursor: not-allowed;
+}
+
+.control-status {
+
+    display: inline-block;
+
+    margin-left: 20px;
+
+    font-weight: bold;
+
+    color: #666;
+}
+
+.toast {
+
+    position: fixed;
+
+    bottom: 20px;
+
+    right: 20px;
+
+    min-width: 320px;
+
+    max-width: 420px;
+
+    background: white;
+
+    border-left: 6px solid #16a34a;
+
+    box-shadow: 0 4px 12px rgba(0,0,0,0.25);
+
+    border-radius: 8px;
+
+    padding: 14px;
+
+    z-index: 9999;
+
+    animation: slideIn 0.3s ease;
+}
+
+.toast-error {
+
+    border-left: 6px solid #dc2626;
+}
+
+.toast-title {
+
+    font-size: 16px;
+
+    font-weight: bold;
+
+    margin-bottom: 6px;
+}
+
+.toast-message {
+
+    color: #444;
+}
+
+@keyframes slideIn {
+
+    from {
+
+        opacity: 0;
+
+        transform: translateX(100%);
+    }
+
+    to {
+
+        opacity: 1;
+
+        transform: translateX(0);
+    }
+}
+
+.toast-hide {
+
+    opacity: 0;
+
+    transition: opacity 0.5s;
+}

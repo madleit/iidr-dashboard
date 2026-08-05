@@ -43,9 +43,48 @@
 
 <div class="card">
 
+    <h2>Replication Control</h2>
+
+    <div id="replication-control">
+
+	<button
+    	    id="start-btn"
+            class="control-button start-button"
+            onclick="startMirroring()">
+            ▶ Start Mirroring
+	</button>
+
+	<button
+            id="stop-btn"
+            class="control-button stop-button"
+            onclick="endReplication()">
+            ■ End Replication
+</button>
+        <div
+            id="control-status"
+            class="control-status">
+            Ready
+        </div>
+
+    </div>
+
+</div>
+
+<div class="card">
+
     <h2>Datastores</h2>
 
     <div id="datastores">
+        Carregando...
+    </div>
+
+</div>
+
+<div class="card">
+
+    <h2>Datastore Health</h2>
+
+    <div id="datastore-health">
         Carregando...
     </div>
 
@@ -108,7 +147,9 @@
 <script src="/static/js/tables.js"></script>		
 <script src="/static/js/health.js"></script>
 <script src="/static/js/overview.js"></script>
+<script src="/static/js/control.js"></script>
 <script src="/static/js/events.js"></script>
+<script src="/static/js/datastore.js"></script>
 <script src="/static/js/dashboard.js"></script>
 
 </body>
