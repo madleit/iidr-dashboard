@@ -71,10 +71,15 @@ async def login_page(
     request: Request
 ):
 
+    error = request.query_params.get(
+        "error"
+    )
+
     return templates.TemplateResponse(
         "login.html",
         {
-            "request": request
+            "request": request,
+            "error": error
         }
     )
 

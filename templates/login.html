@@ -6,7 +6,21 @@
     <title>
         IIDR Dashboard Login
     </title>
+            {% if error %}
 
+            <div class="error-box">
+
+                {% if error == "invalid_credentials" %}
+                    Invalid username or password.
+                {% endif %}
+
+                {% if error == "access_denied" %}
+                    User is not a member of cdc group.
+                {% endif %}
+
+            </div>
+
+            {% endif %}
     <link rel="stylesheet" href="/static/css/dashboard.css">
 
 </head>
