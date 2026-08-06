@@ -6,25 +6,27 @@
     <title>IIDR Dashboard</title>
 
     <link
-    	rel="stylesheet"
-	href="/static/css/dashboard.css">
+        rel="stylesheet"
+        href="/static/css/dashboard.css">
 
 </head>
 
 <body>
 
 <header class="app-header">
+    <div class="header-left">
+        <div class="brand-area">
 
-    <div class="brand-area">
+            <img
+                src="{{ kyndryl_logo }}" class="brand-logo" alt="Kyndryl">
 
-        <img
-            src="{{ kyndryl_logo }}" class="brand-logo" alt="Kyndryl">
-            
-        <div class="brand-divider"></div>
+            <div class="brand-divider"></div>
 
-        <img
-            src="{{ client_logo }}" class="brand-logo client-content" alt="FedEX">
+            <img
+                src="{{ client_logo }}" class="brand-logo client-content" alt="FedEX">
+    </div>
 
+    <div class="header-center">
         <div class="app-title">
             {{ app_name }}
         </div>
@@ -32,9 +34,11 @@
             Replication Monitoring & Management Platform
         </div>
         <div class="app-environment">
-           [ {{ customer_name }} {{ environment_name }} ]
+           {{ customer_name }} {{ environment_name }}
         </div>
+    </div>
 
+    <div class="header-right">
         <div class="header-meta">
             <span>
                 Version {{ version }}
@@ -47,7 +51,6 @@
 
             <a href="/logout" class="logout-link">Logout</a>
         </div>
-
     </div>
 
 </header>
@@ -84,14 +87,14 @@
 
     <div id="replication-control">
 
-	<button
-    	    id="start-btn"
+        <button
+            id="start-btn"
             class="control-button start-button"
             onclick="startMirroring()">
             ▶ Start Mirroring
-	</button>
+        </button>
 
-	<button
+        <button
             id="stop-btn"
             class="control-button stop-button"
             onclick="endReplication()">
@@ -232,7 +235,7 @@
 
 </div>
 
-<script src="/static/js/tables.js"></script>		
+<script src="/static/js/tables.js"></script>
 <script src="/static/js/health.js"></script>
 <script src="/static/js/overview.js"></script>
 <script src="/static/js/control.js"></script>

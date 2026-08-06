@@ -352,23 +352,17 @@ tr:nth-child(even) {
 
 .app-header {
 
-    background: #ffffff;
-
-    border-radius: 10px;
-
-    padding: 18px 24px;
-
-    margin-bottom: 25px;
-
     display: flex;
-
-    justify-content: space-between;
 
     align-items: center;
 
-    box-shadow:
-        0 2px 10px
-        rgba(0,0,0,0.12);
+    justify-content: space-between;
+
+    width: 100%;
+
+    box-sizing: border-box;
+
+    padding: 20px 30px;
 }
 
 .brand-area {
@@ -377,24 +371,18 @@ tr:nth-child(even) {
 
     align-items: center;
 
-    gap: 25px;
-
-    width: 320px;
+    gap: 15px;
 }
 
 .brand-logo {
 
-    height: 40px !important;
+    height: clamp(
+        32px,
+        2.5vw,
+        48px
+    );
 
-    max-height: 40px !important;
-
-    width: auto !important;
-
-    max-width: 180px;
-
-    object-fit: contain;
-
-    display: block;
+    width: auto;
 }
 
 .client-logo {
@@ -416,39 +404,38 @@ tr:nth-child(even) {
     background: #d0d0d0;
 }
 
-.header-content {
-
-    text-align: right;
-}
-
 .app-title {
 
-    font-size: 34px;
+    font-size: clamp(
+        28px,
+        2vw,
+        42px
+    );
 
     font-weight: 700;
 
-    color: #161616;
+    white-space: nowrap;
 }
 
 .app-environment {
 
     display: inline-block;
 
-    padding: 4px 12px;
+    margin-top: 8px;
+
+    padding: 6px 14px;
 
     border-radius: 20px;
 
-    background: #e8f0ff;
+    background: #E8F0FF;
 
-    color: #0f62fe;
-
-    font-size: 12px;
+    color: #0F62FE;
 
     font-weight: 700;
 
-    text-transform: uppercase;
+    font-size: 12px;
 
-    margin-top: 6px;
+    text-transform: uppercase;
 }
 
 .header-meta {
@@ -481,23 +468,44 @@ tr:nth-child(even) {
 
 .app-subtitle {
 
-    color: #6f6f6f;
+    margin-top: 5px;
 
-    font-size: 13px;
+    font-size: 14px;
 
-    margin-top: 3px;
+    color: #666;
+
 }
 
 .header-center {
 
-    flex: 1;
+    flex: 2;
 
     text-align: center;
 }
 
 .header-user {
 
-    width: 220px;
+    text-align: right;
+
+    font-size: 14px;
+}
+
+.header-left {
+
+    flex: 1;
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 15px;
+
+    justify-content: flex-start;
+}
+
+.header-right {
+
+    flex: 1;
 
     text-align: right;
 }
